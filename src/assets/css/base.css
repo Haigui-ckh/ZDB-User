@@ -1,0 +1,18 @@
+@import './normalize.css';
+
+
+/*全局CSS变量*/
+:root {
+     --color-text: #666; /*文字颜色 */
+    --color-high-text: #ff5777;     /*文字高亮颜色 */
+    --color-tint: #ff8198;          
+    --color-background: #fff;
+    --font-size: 14px;
+}
+
+
+/* 公共样式 */
+body{
+    margin: 0;
+    padding: 0;
+}
