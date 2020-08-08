@@ -2,27 +2,27 @@
   <div id="function-list">
     <div class="function-list-item">
       <img src="~assets/img/advs/f1.svg">
-      <span>功能名</span>
+      <div>功能名</div>
     </div>
     <div class="function-list-item">
       <img src="~assets/img/advs/f1.svg">
-      <span>功能名</span>
+      <div>功能名</div>
     </div>
     <div class="function-list-item">
       <img src="~assets/img/advs/f1.svg">
-      <span>功能名</span>
+      <div>功能名</div>
     </div>
     <div class="function-list-item">
       <img src="~assets/img/advs/f1.svg">
-      <span>功能名</span>
+      <div>功能名</div>
     </div>
     <div class="function-list-item">
       <img src="~assets/img/advs/f1.svg">
-      <span>功能名</span>
+      <div>功能名</div>
     </div>
     <div class="function-list-item">
       <img src="~assets/img/advs/f1.svg">
-      <span>功能名</span>
+      <div>功能名</div>
     </div>
   </div>
 </template>

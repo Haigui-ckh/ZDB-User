@@ -1,33 +1,41 @@
 <template>
   <div id="recommend-store">
     <comps-title>推荐店铺</comps-title>
-    <!-- <slot></slot> -->
-    <div class="rec-store-item">
-      <img src="~assets/img/store/s1.png" alt="">
-      <span>我是店铺名</span>
-    </div>
-    <div class="rec-store-item">
-      <img src="~assets/img/store/s1.png" alt="">
-      <span>我是店铺名</span>
-    </div>
-    <div class="rec-store-item">
-      <img src="~assets/img/store/s1.png" alt="">
-      <span>我是店铺名</span>
-    </div>
-    <div class="rec-store-item">
-      <img src="~assets/img/store/s1.png" alt="">
-      <span>我是店铺名</span>
+    <div class="rec-store-item" 
+        v-for="(item,index) in merchants" :key="item.img"
+        @click="restoreClick(index)">
+      <img :src="item.img" alt="">
+      <span>{{item.title}}</span>
     </div>
   </div>
 </template>
 
 <script>
   import CompsTitle from './common/CompsTitle'
+
   export default {
     name: "RecommendStore",
     components: {
       CompsTitle
+    },
+    props: {
+      merchants: {
+        type: Array
+      }
+    },
+    methods: {
+      restoreClick(index) {
+        this.isClick = index;
+        //此处暂时传入数组下标作为标识
+        this.$router.push(
+          {
+            path: '/Store',
+            query: {storeid: index}
+          }
+        )
+      }      
     }
+
   }
 </script>
 
@@ -36,16 +44,21 @@
     width: 100%;
     display: flex;
     flex-wrap: wrap;
-    /* background-color: whitesmoke; */
-    margin-bottom: 20px;
+    margin-bottom: 10px;
   }
   .rec-store-item {
     width: 46%;
     margin: 5px auto;
-    /* margin-bottom: 5px; */
+    margin-bottom: 10px;
+    padding-bottom: 10px;
     border-radius:5px;
-    background-color:white ;
+    border: 1px solid #f6f6f6;
+    /* background-color:turquoise ; */
     font-size: 14px;
+    
+  }
+  .rec-store-item span {
+    margin-left: 10% ;
     
   }
   .rec-store-item img {

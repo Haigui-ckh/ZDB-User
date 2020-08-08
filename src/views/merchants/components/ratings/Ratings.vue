@@ -54,7 +54,7 @@
           </span>
         </div>
 
-        <div class="labels-view">
+        <!-- <div class="labels-view">
           <span
             class="item"
             v-for="(item,index) in ratings.labels"
@@ -63,7 +63,7 @@
           >
             {{item.content}}{{item.label_count}}
           </span>
-        </div>
+        </div> -->
 
         <ul class="rating-list">
           <li
@@ -96,6 +96,7 @@
     </div>
   </div>
 </template>
+
 <script>
   import BScroll from 'better-scroll'
   import Split from '../split/Split'
@@ -117,22 +118,6 @@
       Star
     },
     created() {
-      // fetch("/api/ratings")
-      //   .then(res => res.json())
-      //   .then(response => {
-      //     if (response.code == 0) {
-            // this.ratings = response.data
-            // this.$nextTick(() => {
-              // if (!this.scroll) {
-              //   this.scroll = new BScroll(this.$refs.rateView, {
-              //     click: true
-              //   })
-              // } else {
-              //   this.scroll.refresh()
-              // }
-      //       })
-      //     }
-      //   })
         axios({
           url: '/ratings.json'
           }).then(res => {

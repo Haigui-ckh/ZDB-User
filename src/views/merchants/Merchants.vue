@@ -1,15 +1,10 @@
 <template>
-  <div>
-    
-    <!-- <nav-bar class="nav-bar">
-      <div slot="left" @click="backClick"><img src="~assets/img/common/back.svg"></div>
-    </nav-bar> -->
-    <back-nav></back-nav>
+  <div>    
+    <back-nav destination="/home"></back-nav>
     <!--头部-->
     <store-info></store-info>
     <!--导航-->
     <app-nav :commentNum="commentNum"></app-nav>
-
     <!--内容-->
     <keep-alive>
       <router-view></router-view>

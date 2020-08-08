@@ -1,13 +1,14 @@
 @import './normalize.css';
 
-
 /*全局CSS变量*/
 :root {
      --color-text: #666; /*文字颜色 */
     --color-high-text: #ff5777;     /*文字高亮颜色 */
     --color-tint: #ff8198;          
     --color-background: #fff;
+    --color-theme:orange;
     --font-size: 14px;
+    --color-border: #D9E2E9;
 }
 
 

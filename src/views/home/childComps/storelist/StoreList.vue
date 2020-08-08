@@ -59,7 +59,6 @@ export default {
 
 <style scoped>
   .store-list-name {
-    /* background-color: springgreen; */
     text-align: center;
     margin-bottom: 10px;
   }

@@ -12,6 +12,7 @@
           </div>
         </div>
 
+        
         <div class="pics-wrapper" v-if="seller.poi_env" ref="picsView">
           <ul class="pics-list" ref="picsList">
             <li
@@ -38,12 +39,16 @@
         </div>
 
         <div class="shipping-wrapper">
-          配送时间: {{seller.shipping_time}}
+          营业时间: {{seller.shipping_time}}
+        </div>
+        <div class="report-wrapper">
+          举报商家
+          <span class="icon-keyboard_arrow_right"></span>
         </div>
       </div>
 
       <Split></Split>
-      <div class="other-wrapper">
+      <!-- <div class="other-wrapper">
         <div class="server-wrapper">
           商家服务
           <div
@@ -68,7 +73,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
@@ -210,7 +215,11 @@
     font-size: 14px;
   }
 
-  .seller .seller-wrapper .seller-view .safety-wrapper span {
+  /* .seller .seller-wrapper .seller-view .safety-wrapper span {
+    float: right;
+    font-size: 14px;
+  } */
+  .icon-keyboard_arrow_right {
     float: right;
     font-size: 14px;
   }
@@ -234,6 +243,12 @@
     font-size: 14px;
     line-height: 18px;
   }
+  .report-wrapper {
+    padding: 15px 17px 15px 25px;
+    background-size: 15px 15px;
+    font-size: 14px;
+    line-height: 18px;  
+  }
 
   .seller .seller-wrapper .other-wrapper {
     padding-left: 15px;
@@ -241,6 +256,7 @@
 
   .seller .seller-wrapper .other-wrapper .server-wrapper {
     background: url(server.png) no-repeat left center;
+    /* background: url(); */
     background-size: 15px 15px;
     padding: 15px 0 17px 25px;
     font-size: 14px;

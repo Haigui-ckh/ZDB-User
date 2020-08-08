@@ -6,7 +6,6 @@
     </div>
     <span id="username">芒芒</span>
     <div id="reward-points">
-      我是积分栏
       <!-- <div id="reward-points-">积分余额</div> -->
     </div>
   </div>
@@ -28,7 +27,7 @@
     margin: 0 auto ;
 
     border-radius: 5px;
-    border: 10px solid #f6f6f6;
+    border-top: 10px solid #f6f6f6;
     border-width: 10px 0;
   }
   #profile-picture {

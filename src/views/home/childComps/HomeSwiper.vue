@@ -3,17 +3,17 @@
     <swiper>
       <swiper-item>
         <a href="#">
-          <img src="~assets/img/swiper/banner1.png" alt="">
+          <img src="~assets/img/swiper/b1.png" alt="">
         </a>
       </swiper-item>
       <swiper-item>
         <a href="#">
-          <img src="~assets/img/swiper/banner2.png" alt="">
+          <img src="~assets/img/swiper/b2.jpg" alt="">
         </a>
       </swiper-item>
       <swiper-item>
         <a href="#">
-          <img src="~assets/img/swiper/banner3.png" alt="">
+          <img src="~assets/img/swiper/b3.jpg" alt="">
         </a>
       </swiper-item>
     </swiper>

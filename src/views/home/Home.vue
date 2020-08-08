@@ -2,18 +2,30 @@
 
   <div id="home">
     <!-- 顶部navbar -->
-    <nav-bar class="home-navbar"><div slot="center">整点巴</div></nav-bar>
-    <scroll class="home-scroll">
+    <nav-bar class="home-navbar">
+      <div slot="center">整点巴</div>
+      <div slot="right" @click="goMessage">
+        <img class="message" src="~assets/img/home/message.svg">
+      </div>
+    </nav-bar>
+
+    <scroll class="home-scroll" 
+            :pull-up-load="true" @pullingUp="loadmore">
       <search class="home-search"></search>
       <home-swiper></home-swiper>
       <show-service></show-service>           <!-- 营销配置，快递服务等 -->             
       <function-list></function-list>         <!-- 功能区 --><!-- 项目需求中要求可自由增添或删减 -->    
       
       <advs></advs>                           <!-- 广告条部分 -->   
+
       <daily-special 
       :specialGoods="[{name: '西瓜'},{name: '可乐'},{name: '酸辣粉'},{name: '奶茶'}]">
       </daily-special>                        <!-- 天天特价 -->
-      <recommend-store></recommend-store>     <!-- 推荐店铺 -->
+
+      <recommend-store :merchants="[{title: '日本料理', img: 'https://p0.meituan.net/bbia/f58fafc0be2bc3a69dfcac20260888c2201000.jpg@267w_150h_1e_1c'},
+                                    {title: '华莱士', img: 'https://p1.meituan.net/bbia/062a186c23cfb9ebe34e95ca235ff660535199.jpg@267w_150h_1e_1c'},
+                                    {title: '芋泥奶茶', img: 'https://p0.meituan.net/bbia/619dd92fdffa550698a1e3d1d8bfe577392434.jpg@267w_150h_1e_1c'},
+                                    {title: '清汤拉面', img: 'https://p1.meituan.net/mogu/cb6e5ed585e058d2862811174636e092223079.jpg@267w_150h_1e_1c'}]" />    <!-- 推荐店铺 -->
       <store-list :stores="[{name: '重庆鸡公煲'}, {name: '小龙坎火锅'}, {name: '古茗'}]"/>
       <ul style="color:white">
         <li>zdb</li>
@@ -81,10 +93,14 @@
       StoreListItem,
       StoreList,
     },
-    data () {
-    return {}
-    },
     methods:{
+      loadmore() {
+        // 下拉加载更多
+        console.log("加载")
+      },
+      goMessage() {
+        this.$router.push('/message')
+      }
     }
   }
 </script>
@@ -107,5 +123,9 @@
     top: 44px;
     bottom: 49px;
     overflow: hidden;
+  }
+  .message {
+    width: 40%;
+    margin-top: 15% ;
   }
 </style>

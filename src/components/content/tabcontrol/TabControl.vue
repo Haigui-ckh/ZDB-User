@@ -19,6 +19,11 @@ export default {
       }
     }
   },
+  created() {
+    if(this.$route.query.serviceid){
+      this.currentIndex = this.$route.query.serviceid;
+    }
+  },
   data() {
     return {
       currentIndex: 0
@@ -46,10 +51,10 @@ export default {
     flex: 1;
   }
   .active{
-    color:yellowgreen
+    color:#FF9900
   }
   .active span{
     padding: 5px;
-    border-bottom: 3px solid yellow;
+    border-bottom: 3px solid #FF9900;
   }
 </style>

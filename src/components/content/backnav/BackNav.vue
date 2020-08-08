@@ -5,6 +5,9 @@
       <div slot="center">
         <slot name="center-word"></slot>
       </div>
+      <div slot="right">
+        <slot name="right-content"></slot>
+      </div>
     </nav-bar>
   </div>
 </template>
@@ -17,15 +20,29 @@
     components: {
       NavBar
     },
+    props: {
+      destination: {
+        default: null
+      }
+    },
     methods: {
       backClick() {
-        this.$router.go(-1);
+        if(this.destination){
+          this.$router.push(this.destination);
+        }
+        else{
+          this.$router.go(-1);
+        }
+        // this.$router.go(-1)
       }
     }
   }
 </script>
 
 <style scoped>
+  #back-nav {
+    background-color: white;
+  }
   .nav-bar {
     text-align: center;
   }

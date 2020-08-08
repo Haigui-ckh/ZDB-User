@@ -24,6 +24,7 @@ export default {
   }
   .left, .right{
     width: 60px;
+    text-align: center;
   }
 
   .center{

@@ -13,7 +13,8 @@
         </div>
       </div>
       <!--底部右侧-->
-      <div class="content-right" :class="{'highligh':totalCount>0}">
+      <div class="content-right" @click="goPay"
+      :class="{'highligh':totalCount>0}">
         {{payStr}}
       </div>
       <!-- 购物车列表 -->
@@ -132,6 +133,11 @@
       },
       hideMask() {
         this.fold = true;
+      },
+      goPay() {
+        if (this.totalCount > 0) {
+          this.$router.push('/confirmorder')
+        }
       }
 
     },
@@ -200,7 +206,7 @@
   }
 
   .shopcart-wrapper .content-left .logo-wrapper.highligh {
-    background: #ffd161;
+    background: var(--color-theme);
   }
 
   .shopcart-wrapper .content-left .logo-wrapper .logo.highligh {
@@ -225,7 +231,7 @@
   }
 
   .shopcart-wrapper .content-right.highligh {
-    background: #FFD161;
+    background: var(--color-theme);
     color: #2D2B2A;
   }
 
