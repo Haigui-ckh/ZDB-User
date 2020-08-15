@@ -2,11 +2,15 @@
   <div id="ConfirmOrder">
     <OnePageScroll class="scroll">
       <span slot="centerword">确认订单</span>
+
       <ul class="confirm-list">
-        <li class="confirm-addr">
-          <span>选择收货地址</span>
-          <img src="~assets/img/common/to.png">
+        <li class="confirm-addr" @click="chooseAddr">
+          <div v-if="!temp">
+            <span>选择收货地址</span>
+            <img src="~assets/img/common/to.png">
+          </div>
         </li>
+
         <li class="confirm-prod">
           <div class="prod-info">
             商品信息
@@ -24,19 +28,33 @@
             小计
             <span>1元</span>
           </div>
-          </li>
+        </li>
+
         <li class="confirm-remarks">
           <div>备注</div>
           <textarea placeholder="在此输入备注"></textarea>
         </li>
       </ul>
     </OnePageScroll>
+
     <section class="confirm_order">
-          <p class="wait">待支付 ¥{{}}</p>
+          <p class="wait">待支付 ¥</p>
           <!-- checkoutData.cart.total -->
           <p class="pay">确认下单</p>
           <!-- @click="confirmOrder"  -->
     </section>
+
+    <mt-popup
+    v-model="popupVisible"
+    position="bottom"
+    class="chooseAddrPop">
+      <div class="popTitle">
+        <span>选择收货地址</span>
+      </div>
+      <mt-cell v-for="(item,index) in addData" :key="index"  :title="item.address" :label="secondLine(item)" @click.native="addrClick(item)">
+        <img src="~@/assets/img/profile/modify.svg" @click="handleModify(item)">
+      </mt-cell>
+    </mt-popup>
   </div>
 </template>
 
@@ -51,8 +69,49 @@
     props: {
 
     },
-    mounted() {
-      
+    data() {
+      return {
+        popupVisible: false,
+        addData:[
+          {
+            address: '竹园',
+            person: '曹凯晖',
+            tel: 1452148454,
+          },
+          {
+            address: '李园',
+            person: '张三',
+            tel: 1452148454,
+          },
+          {
+            address: '桃园',
+            person: '李四',
+            tel: 1452148454,
+          },
+        ],
+        temp: {
+          address: '',
+          person: '',
+          tel: '',
+        },
+      }
+    },
+    methods: {
+      chooseAddr() {
+        this.popupVisible = true
+      },
+      secondLine(item) {
+        return item.person +' '+ item.tel
+      },
+      handleModify(item) {
+        this.temp = Object.assign({}, item)
+        this.popupVisible = true
+      },
+      addrClick(item) {
+        console.log(item)
+        this.temp = Object.assign({}, item)
+        this.popupVisible = false
+      }
     }
   }
 </script>
@@ -70,6 +129,7 @@
     background-color: white;
   }
   .confirm-addr {
+    margin-top: 0.5rem;
     height: 4rem;
     line-height: 4rem;
     color: #cccccc;
@@ -122,14 +182,32 @@
     /* color: white; */
   }
   .confirm_order .wait {
-    background-color: #FFFFCC;
+    background-color: #000000;
     flex: 5;
     padding-left: .7rem;
+    color:white;
   }
   .confirm_order .pay {
     flex: 2;
     background-color: var(--color-theme);
     text-align: center;
     color: white;
+  }
+  .chooseAddrPop {
+    width: 100%;
+    height: 60%;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+  }
+  .chooseAddrPop img {
+    height: 24px;
+  }
+  .chooseAddrPop .popTitle {
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    height: 36px;
+    line-height: 36px;
+    text-align: center;
+    margin-bottom: 10px;
   }
 </style>

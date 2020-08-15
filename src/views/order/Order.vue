@@ -2,7 +2,7 @@
   <div id="order">
     <nav-bar class="order-navbar">
       <div slot="center">我的订单</div>
-      </nav-bar>
+    </nav-bar>
     <tab-control  class="order-tabcontrol"
                   :titles="['未付款','配送中','已完成']" 
                   @tabClick="tabClick"/>

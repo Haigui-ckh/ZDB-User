@@ -1,6 +1,7 @@
 <template>
   <div id="my-profile">
     <OnePageScroll>
+      <div slot="rightword" style="color:orange" @click="preserveClick">保存</div>
       <span slot="centerword">我的资料</span>
       <mt-field label="用户名" placeholder="请输入用户名" v-model="username"></mt-field>
       <mt-field label="手机号" placeholder="请输入手机号" type="tel" v-model="phone"></mt-field>
@@ -11,6 +12,13 @@
         to="/shippingaddress"
         is-link/>
     </OnePageScroll>
+    <mt-popup
+      v-model="popupVisible"
+      popup-transition="popup-fade"
+      class="popTip"
+      >
+      <div>保存成功!</div>
+    </mt-popup>
   </div>
 </template>
 
@@ -26,11 +34,31 @@
         username :'' ,
         phone:'' ,
         number:'' ,
-        birthday:''
+        birthday:'',
+        popupVisible: false
         }
+    },
+    methods: {
+      preserveClick() {
+        console.log('保存')
+        this.popupVisible = true
+        setTimeout(() => {
+          this.popupVisible= false
+        }, 2000);
+      }
     }
   }
 </script>
 
 <style scoped>
+  .popTip{
+  height: 100px;
+  line-height: 100px;
+  width: 200px;
+  text-align: center;
+  font-size: 16px;
+  background-color: white;
+  border: 1px solid orange;
+  border-radius: 15px;
+}
 </style>

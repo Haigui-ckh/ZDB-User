@@ -1,25 +1,7 @@
-/* .searchBox {
-	position: absolute;
-	width: 90%;
-	height: 1.333333rem;
-	border: none;
-	left: 5%;
-	top: 1.777777rem;
-}
-
-.search {
-	width: 100%;
-	height: 100%;
-	border: none;
-	border-radius: 1.333333rem;
-	font-size: 0.555555rem;
-	text-indent: 1.555555rem;
-} */
-
 .take,
 .give {
 	width: 100%;
-	height: 2.777777rem;
+	height: 3rem;
 	background-color: #fff;
 	margin-top: 0.222222rem;
 	line-height: 2.777777rem;
@@ -55,7 +37,7 @@
 }
 
 .choiceAddr {
-	font-size: 0.7rem;
+	font-size: 0.80rem;
 	float: left;
 	margin: 0;
 	margin-left: 0.444444rem;
@@ -126,7 +108,7 @@
 .sub,
 .seAddr {
 	width: 100%;
-	height: 2.777777rem;
+	height: 3rem;
 	background-color: #fff;
 	margin-top: 0.222222rem;
 	padding: 10px 0.666666rem 0.222222rem 0.444444rem;
@@ -134,7 +116,7 @@
 
 .expTit {
 	float: left;
-	font-size: 0.7rem;
+	font-size: 0.8rem;
 	margin-top: 10px;
 	clear: both;
 
@@ -266,11 +248,11 @@
 	display: block;
 	clear: both;
 	outline: none;
-	width: 12.777777rem;
-	height: 1.444444rem;
+	width: 12.8rem;
+	height: 1.6rem;
 	margin: auto;
-	font-size: 0.666666rem;
-	border-radius: 1.111111rem;
+	font-size: 0.85rem;
+	border-radius: 1.2rem;
 	border: none;
 	color: #fff;
 	background: linear-gradient(to bottom, #fda15f 30%, #f58c4a 50%, #f1803d 70%, #e87737 100%);

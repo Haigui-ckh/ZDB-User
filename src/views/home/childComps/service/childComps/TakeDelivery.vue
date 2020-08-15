@@ -65,13 +65,21 @@
 				<span class="zj">总计：</span>
 				<span class="money">￥0</span>
 			</div>
-			<button class="btn">提交订单</button>
+			<!-- <button class="btn">提交订单</button> -->
 		</div>
+
+		<section class="confirm_order">
+			<p class="wait">待支付 ¥</p>
+			<!-- checkoutData.cart.total -->
+			<p class="pay">确认下单</p>
+			<!-- @click="confirmOrder"  -->
+    </section>
   </div>  
 		
 </template>
 
 <script>
+
   export default {
 		name: "TakeDelivery",
 		data() {
@@ -125,4 +133,33 @@
 		margin: 0 auto ;
 		clear: both;
 	}
+	  .confirm_order {
+    display: flex;
+    position: fixed;
+		bottom: 0;
+		right: 0;
+		left: 0;
+    width: 100%;
+    height: 3rem;
+    background-color: violet;
+    z-index: 10;
+  }
+  .confirm_order p{
+    line-height: 3rem;
+    height: 100%;
+    margin-top: 0 ;
+    /* color: white; */
+  }
+  .confirm_order .wait {
+    background-color: #000000;
+    flex: 5;
+    padding-left: .7rem;
+    color:white;
+  }
+  .confirm_order .pay {
+    flex: 2;
+    background-color: var(--color-theme);
+    text-align: center;
+    color: white;
+  }
 </style>

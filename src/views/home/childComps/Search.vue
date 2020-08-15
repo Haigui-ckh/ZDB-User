@@ -25,8 +25,6 @@
         padding-right: 20px;
         overflow: hidden;
         z-index: 50;
-        /* background-color: #FB633C; */
-        background-color: thistle;
         margin-bottom: 10px;
         
     }
@@ -42,6 +40,7 @@
         font-size: 14px;
         color: #999;
         border: none;
+        border: 1px solid orange;
     }
     .jd_header .header_glass {
         display: inline-block;

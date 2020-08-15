@@ -6,7 +6,9 @@
                   @tabClick="tabClick"/>
     
     <div class="service-content">
-      <router-view/>
+      <scroll>
+        <router-view/>
+      </scroll>
     </div>
     
   </div>
@@ -14,7 +16,7 @@
 
 <script>
   import TabControl from "components/content/tabcontrol/TabControl";
-
+  import Scroll from "components/common/scroll/Scroll"
 
   import BackNav from 'components/content/backnav/BackNav'
   
@@ -25,6 +27,7 @@
     components: {
       TabControl,
       BackNav,
+      Scroll
     },
     data() {
       return{

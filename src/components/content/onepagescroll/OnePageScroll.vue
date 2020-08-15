@@ -1,10 +1,10 @@
 <template>
   <div id="OnePageScroll">
-    <back-nav>
+    <back-nav class="backnav">
       <div slot="center-word">
         <slot name="centerword"></slot>
       </div>
-      <div slot="right-content">
+      <div slot="right-content" @click="rightClick" class="navRight">
         <slot name="rightword"></slot>
       </div>
     </back-nav>
@@ -22,6 +22,11 @@
     components: {
         Scroll,
         BackNav
+    },
+    methods: {
+      rightClick() {
+        this.$emit("navRightClick")
+      }
     }
   }
 </script>
@@ -37,7 +42,17 @@
     background-color: white;
   }
   .onepagesc {
+    position: absolute;
+    right: 0;
+    left: 0;
     background-color: #f6f6f6;
     height: 100%;
+    z-index: -1;
+  }
+  .backnav {
+    background: white;
+  }
+  .navRight {
+    color: var(--color-theme);
   }
 </style>
