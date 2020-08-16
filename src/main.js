@@ -5,6 +5,8 @@ import store from './store'
 import MintUI from 'mint-ui'
 import axios from 'axios'
 import 'mint-ui/lib/style.css'
+import 'vant/lib/index.css'
+
 
 Vue.config.productionTip = false
 

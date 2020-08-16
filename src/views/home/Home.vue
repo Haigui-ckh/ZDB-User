@@ -9,24 +9,17 @@
       </div>
     </nav-bar>
 
-    <scroll class="home-scroll" 
-            :pull-up-load="true" @pullingUp="loadmore">
-      <search class="home-search"></search>
-      <home-swiper></home-swiper>
-      <show-service></show-service>           <!-- 营销配置，快递服务等 -->             
-      <function-list></function-list>         <!-- 功能区 --><!-- 项目需求中要求可自由增添或删减 -->    
-      
-      <advs></advs>                           <!-- 广告条部分 -->   
+    <!-- 可滚动的内容区域 -->
+    <scroll class="home-scroll" :pull-up-load="true" @pullingUp="loadmore">
+      <search class="home-search" />
+      <home-swiper />
+      <show-service />          <!-- 营销配置，快递服务等 -->             
+      <function-list :functionList="funcList" />       <!-- 功能区 --><!-- 项目需求中要求可自由增添或删减 -->    
+      <advs />                          <!-- 广告条部分 -->   
+      <daily-special  :specialGoods="dailyGoodsList"/>   <!-- 天天特价 -->
+      <recommend-store :merchants="recommendStoreList" />    <!-- 推荐店铺 -->
+      <store-list :stores="storeList"/>
 
-      <daily-special 
-      :specialGoods="[{name: '西瓜'},{name: '可乐'},{name: '酸辣粉'},{name: '奶茶'}]">
-      </daily-special>                        <!-- 天天特价 -->
-
-      <recommend-store :merchants="[{title: '日本料理', img: 'https://p0.meituan.net/bbia/f58fafc0be2bc3a69dfcac20260888c2201000.jpg@267w_150h_1e_1c'},
-                                    {title: '华莱士', img: 'https://p1.meituan.net/bbia/062a186c23cfb9ebe34e95ca235ff660535199.jpg@267w_150h_1e_1c'},
-                                    {title: '芋泥奶茶', img: 'https://p0.meituan.net/bbia/619dd92fdffa550698a1e3d1d8bfe577392434.jpg@267w_150h_1e_1c'},
-                                    {title: '清汤拉面', img: 'https://p1.meituan.net/mogu/cb6e5ed585e058d2862811174636e092223079.jpg@267w_150h_1e_1c'}]" />    <!-- 推荐店铺 -->
-      <store-list :stores="[{name: '重庆鸡公煲'}, {name: '小龙坎火锅'}, {name: '古茗'}]"/>
       <ul style="color:white">
         <li>zdb</li>
         <li>zdb</li>
@@ -52,7 +45,6 @@
         <li>zdb</li>
         <li>zdb</li>
       </ul>
-    
     </scroll>
 
 
@@ -92,6 +84,54 @@
       FunctionList,
       StoreListItem,
       StoreList,
+    },
+    data() {
+      return {
+        funcList:[
+          { 
+            imgUrl: 'img/f1.svg',
+            name: '功能1' 
+          },
+          { 
+            imgUrl: 'img/f1.svg',
+            name: '功能1' 
+          },
+          { 
+            imgUrl: 'img/f1.svg',
+            name: '功能1' 
+          },
+          { 
+            imgUrl: 'img/f1.svg',
+            name: '功能1' 
+          },
+          { 
+            imgUrl: 'img/f1.svg',
+            name: '功能1' 
+          },
+          { 
+            imgUrl: 'img/f1.svg',
+            name: '功能1' 
+          },
+        ],
+        // 除名字图片外需要的字段：storeName,monthlySalesVolume,deliveryTime,deliverDistance,startFee,deliveryFee 
+        storeList:[
+          { name: '重庆鸡公煲', imgUrl: 'img/s1.png' },
+          { name: '小龙坎火锅', imgUrl: 'img/s2.jpg' }, 
+          { name: '古茗', imgUrl: 'img/s3.jpg' }
+        ],
+        recommendStoreList: [
+          {title: '日本料理', img: 'https://p0.meituan.net/bbia/f58fafc0be2bc3a69dfcac20260888c2201000.jpg@267w_150h_1e_1c'},
+          {title: '华莱士', img: 'https://p1.meituan.net/bbia/062a186c23cfb9ebe34e95ca235ff660535199.jpg@267w_150h_1e_1c'},
+          {title: '芋泥奶茶', img: 'https://p0.meituan.net/bbia/619dd92fdffa550698a1e3d1d8bfe577392434.jpg@267w_150h_1e_1c'},
+          {title: '清汤拉面', img: 'https://p1.meituan.net/mogu/cb6e5ed585e058d2862811174636e092223079.jpg@267w_150h_1e_1c'}
+        ],
+        dailyGoodsList: [
+          { name: '西瓜' },
+          { name: '可乐' },
+          { name: '酸辣粉' },
+          { name: '奶茶' }
+        ]
+      }
     },
     methods:{
       loadmore() {

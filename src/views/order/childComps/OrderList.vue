@@ -3,6 +3,7 @@
     <!-- 订单列表 -->
     <div class="order-item">
       <p class="order-name">香辣鸡腿堡</p>
+      <p  @click="viewDetail">查看详情</p>
       <p>￥15元</p>
       <p>
         <span>下单时间：</span>2020/8/4  15:00
@@ -16,6 +17,7 @@
     </div>
     <div class="order-item">
       <p class="order-name">香辣鸡腿堡</p>
+      <p  @click="viewDetail">查看详情</p>
       <p>￥15元</p>
       <p>
         <span>下单时间：</span>2020/8/4  15:00
@@ -24,8 +26,8 @@
         <span>骑手电话：</span>18495486515
         <span id="contact-platform" @click="contactpaltform">联系平台</span>
       </p>
-      <div class="order-deal" v-if="orderType === 0" @click="cancelOrder(oid)">取消订单</div>
-      <div class="order-deal" v-if="orderType === 2" @click="goComment(orderType)">评价</div>
+      <div class="order-deal" v-if="orderType === 0" @click.stop="cancelOrder(oid)">取消订单</div>
+      <div class="order-deal" v-if="orderType === 2" @click.stop="goComment(orderType)">评价</div>
     </div>
     <div class="order-item">
       <p class="order-name">香辣鸡腿堡</p>
@@ -83,6 +85,9 @@
       cancelOrder(oid) {
         // 发送到order处理
         this.$emit('cancelOrder',oid)
+      },
+      viewDetail() {
+        this.$router.push('/orderdetails')
       }
     }
   }

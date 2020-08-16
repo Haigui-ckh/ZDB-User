@@ -8,6 +8,7 @@
         <slot name="rightword"></slot>
       </div>
     </back-nav>
+    <slot name="tab"></slot>
     <scroll class="onepagesc">
       <slot></slot>
     </scroll>

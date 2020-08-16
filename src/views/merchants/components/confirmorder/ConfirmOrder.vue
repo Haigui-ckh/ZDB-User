@@ -2,15 +2,17 @@
   <div id="ConfirmOrder">
     <OnePageScroll class="scroll">
       <span slot="centerword">确认订单</span>
-
       <ul class="confirm-list">
         <li class="confirm-addr" @click="chooseAddr">
           <div v-if="!temp">
             <span>选择收货地址</span>
-            <img src="~assets/img/common/to.png">
+            <img src="~assets/img/common/to.png">  
+          </div>
+          <div v-if="temp" class="confirm-addr-detail">
+            <span class="addrInfo">{{temp.address}}</span>
+            <span class="addremark">{{temp.name + ' ' + temp.tel}}</span>
           </div>
         </li>
-
         <li class="confirm-prod">
           <div class="prod-info">
             商品信息
@@ -29,7 +31,6 @@
             <span>1元</span>
           </div>
         </li>
-
         <li class="confirm-remarks">
           <div>备注</div>
           <textarea placeholder="在此输入备注"></textarea>
@@ -38,79 +39,67 @@
     </OnePageScroll>
 
     <section class="confirm_order">
-          <p class="wait">待支付 ¥</p>
-          <!-- checkoutData.cart.total -->
-          <p class="pay">确认下单</p>
-          <!-- @click="confirmOrder"  -->
+      <p class="wait">待支付 ¥</p>
+      <!-- checkoutData.cart.total -->
+      <p class="pay" @click="payClick">确认下单</p>
     </section>
 
-    <mt-popup
-    v-model="popupVisible"
-    position="bottom"
-    class="chooseAddrPop">
-      <div class="popTitle">
-        <span>选择收货地址</span>
-      </div>
-      <mt-cell v-for="(item,index) in addData" :key="index"  :title="item.address" :label="secondLine(item)" @click.native="addrClick(item)">
-        <img src="~@/assets/img/profile/modify.svg" @click="handleModify(item)">
-      </mt-cell>
-    </mt-popup>
+    <AddrPop ref="addrPop" @addrReturn="addrReturn" :addrData="addData"></AddrPop>
+
   </div>
 </template>
 
 <script>
   import OnePageScroll from "components/content/onepagescroll/OnePageScroll"
-  
+  import AddrPop from "components/content/addrpop/AddrPop"
+   
+
   export default {
     name: "ConfirmOrder",
     components: {
-      OnePageScroll
-    },
-    props: {
-
+      OnePageScroll,
+      AddrPop
     },
     data() {
       return {
-        popupVisible: false,
         addData:[
           {
             address: '竹园',
-            person: '曹凯晖',
+            name: '曹凯晖',
             tel: 1452148454,
           },
           {
             address: '李园',
-            person: '张三',
+            name: '张三',
             tel: 1452148454,
           },
           {
             address: '桃园',
-            person: '李四',
+            name: '李四',
             tel: 1452148454,
           },
         ],
-        temp: {
-          address: '',
-          person: '',
-          tel: '',
-        },
+        temp: undefined,
       }
     },
     methods: {
       chooseAddr() {
-        this.popupVisible = true
+        this.$refs.addrPop.addrChoose();
       },
       secondLine(item) {
-        return item.person +' '+ item.tel
+        return item.name +' '+ item.tel
       },
       handleModify(item) {
         this.temp = Object.assign({}, item)
         this.popupVisible = true
       },
-      addrClick(item) {
-        console.log(item)
+      addrReturn(item) {
+        // console.log(item)
+        // 获取地址
         this.temp = Object.assign({}, item)
-        this.popupVisible = false
+      },
+      payClick() {
+        this.$router.push('/orderDetails')
       }
     }
   }
@@ -130,12 +119,30 @@
   }
   .confirm-addr {
     margin-top: 0.5rem;
-    height: 4rem;
-    line-height: 4rem;
+    height: 5rem;
+    line-height: 5rem;
     color: #cccccc;
   }
   .confirm-addr img {
     height: 0.8rem;
+  }
+  .confirm-addr-detail {
+    height: 4rem;
+    flex-wrap: wrap;
+    /* background:blueviolet; */
+  }
+  .addrInfo {
+    display: block;
+    height: 3rem;
+    line-height: 3.8rem;
+    color: #000000;
+  }
+  .addremark {
+    display: block;
+    font-size: 12px;
+    height: 1rem;
+    line-height: 1rem;
+    color: #000000;
   }
   .confirm-prod {
     margin-top: 0.5rem;

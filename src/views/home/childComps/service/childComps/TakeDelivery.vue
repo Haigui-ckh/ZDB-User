@@ -14,7 +14,7 @@
 			</div>
 		</div>
 		
-		<a href="myaddr.html">
+		<!-- <a href="myaddr.html">
 			<div class="give">
 				<span class="fas fa-map-marker song"></span>
 				<p class="choiceAddr">请选择送至地址</p>
@@ -22,32 +22,35 @@
 					<img src="~assets/img/home/addr.jpg">
 				</div>
 			</div>
-		</a>
+		</a> -->
+		<div class="give" @click="chooseAddr">
+			<div v-if="!temp">
+				<span class="fas fa-map-marker song"></span>
+				<p class="choiceAddr">请选择送至地址</p>
+				<div class="giveBox">
+					<img src="~assets/img/home/addr.jpg">
+				</div> 
+			</div>
+			<div v-if="temp" class="give-addr-detail">
+				<span class="give-addrInfo">{{temp.address}}</span>
+				<span class="give-addremark">{{temp.name + ' ' + temp.tel}}</span>
+			</div>
+		</div>
 		
 		<div class="expInfo">
 			<p class="expTit">*快递信息:</p>
-			<textarea name="expinfo" class="infotext" placeholder="请粘贴取货信息等"></textarea>
+			<textarea v-model="deliveryData.expInfo"  name="expinfo" class="infotext" placeholder="请粘贴取货信息等"></textarea>
 		</div>
 		
 		<div class="screenshotInfo">
 			<p class="expTit"> 截图信息:</p>
-			<!-- <div class="pic_list_box">
-				<div class="pic_list" v-show="imgDatas.length">
-					<div v-for="(src,index) in imgDatas" :key="index">
-						<img :src="src">
-					</div>
-				</div>
-      </div> -->
-			<div class="upImg">
-				<input type="file" class="choisImg" ref="srceenshotInput"
-							accept="image/*" @change="changeImage"/>
-			</div>
-			<p class="voucher">  取货信息截图</p>
+			<van-uploader v-model="fileList" multiple preview-size="50"/>
+			<!-- <p class="voucher">  取货信息截图</p> -->
 		</div>
 		
 		<div class="remarks">
 			<p class="expTit">备注信息:</p>
-			<input class="remarkInput" type="text" placeholder="时间、无接触配送、代付、指定快递员等" />
+			<input v-model="deliveryData.remark" class="remarkInput" type="text" placeholder="时间、无接触配送、代付、指定快递员等" />
 		</div>
 		
 		<div class="specs">
@@ -65,31 +68,44 @@
 				<span class="zj">总计：</span>
 				<span class="money">￥0</span>
 			</div>
-			<!-- <button class="btn">提交订单</button> -->
+			<button class="btn" @click="handleSubmit">提交订单</button>
 		</div>
-
-		<section class="confirm_order">
-			<p class="wait">待支付 ¥</p>
-			<!-- checkoutData.cart.total -->
-			<p class="pay">确认下单</p>
-			<!-- @click="confirmOrder"  -->
-    </section>
+		<AddrPop ref="addrPop" @addrReturn="addrReturn" :addrData="addrData"></AddrPop>
   </div>  
 		
 </template>
 
 <script>
-
+	import { Uploader } from 'vant'
+	import AddrPop from "components/content/addrpop/AddrPop"
   export default {
 		name: "TakeDelivery",
+		components: {
+			[Uploader.name] : Uploader,
+			AddrPop
+		},
+		props: {
+			addrData: Array
+		},
 		data() {
 			return{
-				imgDatas: [{
-					src: ''
+				fileList: [
+					{ url: 'https://img.yzcdn.cn/vant/leaf.jpg' },
+					// Uploader 根据文件后缀来判断是否为图片文件
+					// 如果图片 URL 中不包含类型信息，可以添加 isImage 标记来声明
+				],
+				deliveryData: {
+					takeAddr: '',
+					sendAddr: '',
+					expInfo: '',
+					imgInfo: undefined,
+					remark: '',
+					specifications: '',
+					specialService: '',
+					orderNum: undefined,
+					total: undefined
 				},
-				{
-					src: ''
-				}]
+        temp: undefined,
 			}
 		},
 		methods: {
@@ -119,7 +135,18 @@
 				// 文件上传服务器
 				// this.setUploadFile(files[0])
 				console.log(files[0])
-			}
+			},
+			handleSubmit() {
+				this.$router.push('/orderdetails')
+			},
+			chooseAddr() {
+        this.$refs.addrPop.addrChoose();
+			},
+      addrReturn(item) {
+        // console.log(item)
+        // 获取地址
+        this.temp = Object.assign({}, item)
+      }
 		}
 	}
 </script>
@@ -127,7 +154,7 @@
 <style scoped>
 	@import './css/all.css';
 	@import './css/main.css';
-	
+
 	#takedelivery {
 		width: 90%;
 		margin: 0 auto ;

@@ -1,35 +1,18 @@
 <template>
   <div id="function-list">
-    <div class="function-list-item">
-      <img src="~assets/img/advs/f1.svg">
-      <div>功能名</div>
-    </div>
-    <div class="function-list-item">
-      <img src="~assets/img/advs/f1.svg">
-      <div>功能名</div>
-    </div>
-    <div class="function-list-item">
-      <img src="~assets/img/advs/f1.svg">
-      <div>功能名</div>
-    </div>
-    <div class="function-list-item">
-      <img src="~assets/img/advs/f1.svg">
-      <div>功能名</div>
-    </div>
-    <div class="function-list-item">
-      <img src="~assets/img/advs/f1.svg">
-      <div>功能名</div>
-    </div>
-    <div class="function-list-item">
-      <img src="~assets/img/advs/f1.svg">
-      <div>功能名</div>
+    <div v-for="(item,index) in functionList" :key="index" class="function-list-item">
+      <img :src="item.imgUrl">
+      <div>{{item.name}}</div>
     </div>
   </div>
 </template>
 
 <script>
   export default {
-    name: "FunctionList"    
+    name: "FunctionList",
+    props: {
+      functionList: Array
+    }  
   }
 </script>
 

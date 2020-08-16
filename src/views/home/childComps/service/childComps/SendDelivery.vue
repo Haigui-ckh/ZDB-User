@@ -32,11 +32,9 @@
 			</div>
 		</div>
 		<div class="screenshotInfo">
-			<p class="expTit">可选附图:</p>
-			<div class="upImg">
-				<input type="file" class="choisImg"/>
-			</div>
-			<p class="voucher">取货信息截图</p>
+			<p class="expTit"> 截图信息:</p>
+			<van-uploader v-model="fileList" multiple preview-size="50"/>
+			<!-- <p class="voucher">取货信息截图</p> -->
 		</div>
 		<div class="remarks">
 			<p class="expTit">备注信息（选填）:</p>
@@ -53,14 +51,33 @@
 				<span class="zj">总计：</span>
 				<span class="money">￥0</span>
 			</div>
-			<button class="btn">提交订单</button>
+			<button class="btn" @click="handleSubmit">提交订单</button>
 		</div>
   </div>
 </template>
 
 <script>
+import { Uploader } from 'vant'
+
 export default {
-  name: "SendDelivery"
+	name: "SendDelivery",
+	components: {
+		[Uploader.name] : Uploader
+	},
+	data () {
+		return {
+			fileList: [
+				{ url: 'https://img.yzcdn.cn/vant/leaf.jpg' },
+				// Uploader 根据文件后缀来判断是否为图片文件
+				// 如果图片 URL 中不包含类型信息，可以添加 isImage 标记来声明
+			],
+		}
+	},
+	methods: {
+		handleSubmit() {
+			this.$router.push('/orderdetails')
+		}
+	}
 }
 </script>
 

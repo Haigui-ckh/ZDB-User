@@ -6,7 +6,7 @@
     <div class="store-list-item" v-for="(store,index) in stores" :key="index"
     @click="storelistClick(index)" :class="{active: index === isClick}">
       <div class="store-list-item-img">
-        <img src="~assets/img/store/s1.png">
+        <img :src="store.imgUrl">
       </div>
       <!-- storeName,monthlySalesVolume,deliveryTime,deliverDistance,startFee,deliveryFee -->
       <table class="store-list-table" >

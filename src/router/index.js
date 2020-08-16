@@ -32,13 +32,15 @@ const TakeDelivery = () => import('../views/home/childComps/service/childComps/T
 const SendDelivery = () => import('../views/home/childComps/service/childComps/SendDelivery')
 const TakeFile = () => import('../views/home/childComps/service/childComps/TakeFile')
 
+// 订单
 const OrderComment = () => import('../views/order/childComps/OrderComment')
+const OrderDetails = () => import('../views/order/childComps/OrderDetails')
 
 // 消息
 const Message = () => import('../views/message/Message')
 const MessagePage = () => import('../views/message/MessagePage')
 
-
+const Pay = () => import('../views/pay/Pay')
 
 Vue.use(VueRouter)
 
@@ -62,6 +64,14 @@ Vue.use(VueRouter)
   {
     path: '/ordercomment',
     component: OrderComment
+  },
+  {
+    path: '/Orderdetails',
+    component: OrderDetails
+  },
+  {
+    path: '/pay',
+    component: Pay
   },
   //  我的  页面路由配置
   {

@@ -2,6 +2,7 @@
   <div>
     <div class="order-item">
       <p class="order-name">香辣鸡腿堡</p>
+      <a>查看详情</a>
       <p>￥15元</p>
       <p>
         <span>下单时间：</span>2020/8/4  15:00

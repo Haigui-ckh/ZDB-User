@@ -5,7 +5,7 @@
 	background-color: #fff;
 	margin-top: 0.222222rem;
 	line-height: 2.777777rem;
-	float: left;
+	/* float: left; */
 }
 
 .qu,
@@ -110,8 +110,8 @@
 	width: 100%;
 	height: 3rem;
 	background-color: #fff;
-	margin-top: 0.222222rem;
-	padding: 10px 0.666666rem 0.222222rem 0.444444rem;
+	margin-top: 0.4rem;
+	/* padding: 10px 0.666666rem 0.222222rem 0.444444rem; */
 }
 
 .expTit {
@@ -124,27 +124,27 @@
 
 .infotext {
 	float: right;
-	width: 11.555555rem;
-	height: 2.222222rem;
+	width: 12rem;
+	height: 2.4rem;
 	border: 1px solid #7a7a7a;
-	font-size: 0.533333rem;
+	font-size: 0.7rem;
 	resize: none;
-	border-radius: 0.222222rem;
-	margin-top: 0.111111rem;
+	border-radius: 0.24rem;
+	margin-top: 0.12rem;
 	outline: none;
-	padding: 0.111111rem;
+	padding: 0.12rem;
 }
 
 .remarkInput {
 	float: right;
-	width: 11.555555rem;
-	height: 1.222222rem;
+	width: 12.5rem;
+	height: 1.4rem;
 	border: 1px solid #7a7a7a;
-	font-size: 0.533333rem;
-	text-indent: 0.222222rem;
+	font-size: 0.7rem;
+	text-indent: 0.24rem;
 	outline: none;
-	border-radius: 0.222222rem;
-	margin-top: 0.222222rem;
+	border-radius: 0.24rem;
+	margin-top: 0.24rem;
 }
 
 .upImg {
@@ -258,6 +258,27 @@
 	background: linear-gradient(to bottom, #fda15f 30%, #f58c4a 50%, #f1803d 70%, #e87737 100%);
 }
 
+
+.give-addr-detail {
+	height: 100%;
+	line-height: 100%;
+	flex-wrap: wrap;
+	background-color: #f2f2f2;
+	border-radius: 15px;
+}
+.give-addrInfo {
+	margin-left: 10px;
+	/* height: 3rem; */
+	line-height: 3rem;
+	color: #000000;
+}
+.give-addremark {
+	font-size: 12px;
+	height: 1rem;
+	line-height: 1rem;
+	margin-left: 10px;
+	color: #cccccc;
+}
 
 /* 
 .do {
