@@ -2,15 +2,9 @@
   <div id="advs">
     <!-- <span>广告展示</span> -->
     <comps-title>广告展示</comps-title>
-    <!-- <slot></slot> -->
-    <div class="advs-item">
-      <a href="#">
-        <img src="~assets/img/advs/campus1.png">
-      </a>
-    </div>
-    <div class="advs-item">
-      <a href="#">
-        <img src="~assets/img/advs/campus1.png">
+    <div class="advs-item" v-for="(item,index) in advsList" :key="index">
+      <a :href="item.link">
+        <img :src="item.imgUrl">
       </a>
     </div>
   </div>
@@ -22,6 +16,9 @@
     name: "Advs",
     components: {
       CompsTitle
+    },
+    props: {
+      advsList: Array
     }
   }
 </script>

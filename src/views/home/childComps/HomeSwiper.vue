@@ -1,19 +1,9 @@
 <template>
   <div id="home-swiper">
     <swiper>
-      <swiper-item>
-        <a href="#">
-          <img src="~assets/img/swiper/b1.png" alt="">
-        </a>
-      </swiper-item>
-      <swiper-item>
-        <a href="#">
-          <img src="~assets/img/swiper/b2.jpg" alt="">
-        </a>
-      </swiper-item>
-      <swiper-item>
-        <a href="#">
-          <img src="~assets/img/swiper/b3.jpg" alt="">
+      <swiper-item v-for="(item,index) in swiperImgList" :key="index">
+        <a :href="item.link">
+          <img :src="item.imgUrl" alt="">
         </a>
       </swiper-item>
     </swiper>
@@ -27,6 +17,9 @@
     components: {
       Swiper,
       SwiperItem
+    },
+    props: {
+      swiperImgList: Array
     }
   }
 </script>

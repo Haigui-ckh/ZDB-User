@@ -2,9 +2,10 @@
   <div id="Service">
     <back-nav destination="/home"></back-nav>
     <tab-control  class="order-tabcontrol"
-                  :titles="['代取快递','代取文件','跑腿代购','代寄快递']" 
+                  :titles="titles" 
+                  :activeIndex="activeid"
                   @tabClick="tabClick"/>
-    
+    <!-- :titles="['代取快递','代取文件','跑腿代购','代寄快递']"  -->
     <scroll class="service-content">
       <!-- 传入地址列表信息 -->
       <router-view :addrData="addData" />
@@ -27,6 +28,16 @@
       Scroll,
       OnePageScroll
     },
+    created() {
+      // 获取地址，初始化tabcontrol的activeIndex
+      let currentpath = this.$route.fullPath
+      this.jumpPath.forEach((value, index, array) => {
+        if (value === currentpath) {
+          this.activeid = index
+        }
+      })
+      
+    },
     data() {
       return{
         jumpPath: ['/service/takedelivery','/service/takefile','/service/purchaseagent','/service/senddelivery'],
@@ -48,6 +59,7 @@
             tel: 1452148454,
           },
         ],
+        titles: ['代取快递','代取文件','跑腿代购','代寄快递']
       }
     },
     methods: {

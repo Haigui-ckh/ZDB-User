@@ -17,12 +17,23 @@ export default {
       default(){
         return []
       }
+    },
+    activeIndex: {
+      type: Number,
+      default() {
+        return 0
+      }
     }
   },
   created() {
     if(this.$route.query.serviceid){
       this.currentIndex = this.$route.query.serviceid;
     }
+    // 若是返回到tabcontrol页面，则使用之前的activeIndex
+    this.currentIndex = this.activeIndex
+  },
+  mounted() {
+    
   },
   data() {
     return {

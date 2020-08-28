@@ -125,6 +125,10 @@ Vue.use(VueRouter)
     ]
   },
   {
+    path: '/reportseller',
+    component: () => import('@/views/merchants/components/seller/ReportSeller')
+  },
+  {
     path: '/confirmorder',
     component: ConfirmOrder
   },

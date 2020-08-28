@@ -14,15 +14,6 @@
 			</div>
 		</div>
 		
-		<!-- <a href="myaddr.html">
-			<div class="give">
-				<span class="fas fa-map-marker song"></span>
-				<p class="choiceAddr">请选择送至地址</p>
-				<div class="giveBox">
-					<img src="~assets/img/home/addr.jpg">
-				</div>
-			</div>
-		</a> -->
 		<div class="give" @click="chooseAddr">
 			<div v-if="!temp">
 				<span class="fas fa-map-marker song"></span>
@@ -55,10 +46,13 @@
 		
 		<div class="specs">
 			<p class="expTit">*规格选项:</p>
+			<Specs :specifications="specifications" @selectSpec="selectSpec"></Specs>
 		</div>
+
 		
 		<div class="special">
 			<p class="expTit">特殊服务:</p>
+			<Specs :specifications="specialservice" @selectSpec="selectSpecial"></Specs>
 		</div>
 		
 		<div class="sub">
@@ -66,23 +60,34 @@
 			<input type="text" class="num" value="1"/>
 			<div class="count">
 				<span class="zj">总计：</span>
-				<span class="money">￥0</span>
+				<span class="money">￥{{totalPrice}}</span>
 			</div>
 			<button class="btn" @click="handleSubmit">提交订单</button>
 		</div>
 		<AddrPop ref="addrPop" @addrReturn="addrReturn" :addrData="addrData"></AddrPop>
+		<Confirm ref="Confirm"></Confirm>
+
   </div>  
 		
 </template>
 
 <script>
-	import { Uploader } from 'vant'
+	import { Uploader, Checkbox, CheckboxGroup } from 'vant'
 	import AddrPop from "components/content/addrpop/AddrPop"
+	import Specs from './Specs'
+	import Confirm from "components/common/confirm/Confirm"
+	
+	import { MessageBox,Toast } from 'mint-ui';
+
   export default {
 		name: "TakeDelivery",
 		components: {
-			[Uploader.name] : Uploader,
-			AddrPop
+			[Uploader.name]: Uploader,
+			[Checkbox.name]: Checkbox,
+			[CheckboxGroup.name]: CheckboxGroup,
+			AddrPop,
+			Specs,
+			Confirm
 		},
 		props: {
 			addrData: Array
@@ -96,19 +101,48 @@
 				],
 				deliveryData: {
 					takeAddr: '',
-					sendAddr: '',
+					sendInfo: {
+						name: '',
+						tel: '',
+						address: ''
+					},
 					expInfo: '',
 					imgInfo: undefined,
 					remark: '',
-					specifications: '',
+					specs: '',
 					specialService: '',
 					orderNum: undefined,
 					total: undefined
 				},
-        temp: undefined,
+				temp: undefined,
+				specsSelectedPrice: [ 0 ],
+				specialSelectedPrice: [ 0 ],
+				specifications: [
+					{ id: 1, name: '1~5kg', price: 3 },
+					{ id: 2, name: '10kg~20kg', price: 6 },
+					{ id: 3, name: '电子产品', price: 0 },
+					{ id: 4, name: '体积较大', price: 0 },
+				],
+				specialservice: [
+					{ id: 1, name: '加急', price: 2},
+					{ id: 1, name: '托管', price: 1},
+					{ id: 1, name: '超级加急', price: 4},
+				]
+			}
+		},
+		computed: {
+			// 总价计算  来源为规格和特殊服务
+			totalPrice() {
+				if (this.specsSelected !== []) {
+					let total = this.specsSelectedPrice.reduce(this.computeTotal) + this.specialSelectedPrice.reduce(this.computeTotal)
+					return total
+				}
 			}
 		},
 		methods: {
+			computeTotal(total, value, index, array) {
+				return total = total + value
+			},
 			changeImage() {
 				// 上传图片事件
 				var files = this.$refs.srceenshotInput.files;
@@ -137,7 +171,17 @@
 				console.log(files[0])
 			},
 			handleSubmit() {
-				this.$router.push('/orderdetails')
+				MessageBox.confirm('确定提交订单?').then(action => {
+					// 上传订单数据
+					setTimeout(() => {
+						this.$router.push('/orderdetails')
+					}, 1000);
+				}).catch(() => {
+					Toast({
+						message:'订单未提交',
+						duration: 1000
+					});
+				})
 			},
 			chooseAddr() {
         this.$refs.addrPop.addrChoose();
@@ -145,8 +189,21 @@
       addrReturn(item) {
         // console.log(item)
         // 获取地址
-        this.temp = Object.assign({}, item)
-      }
+				this.temp = Object.assign({}, item)
+				this.deliveryData.sendInfo = Object.assign({}, item)
+			},
+			selectSpec(price, id) {
+				this.specsSelectedPrice = price
+				this.deliveryData.specs = id
+
+				this.deliveryData.total = this.totalPrice
+			},
+			selectSpecial(price, id) {
+				this.specialSelectedPrice = price
+				this.deliveryData.specialService = id
+
+				this.deliveryData.total = this.totalPrice
+			}
 		}
 	}
 </script>

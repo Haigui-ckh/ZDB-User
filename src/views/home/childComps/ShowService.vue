@@ -4,7 +4,7 @@
       <div>
         <img src="~assets/img/showservice/b.png" width="47px" height="47px">
       </div>
-      <div>代取快递</div>
+      <div class="showservice-item-title">代取快递</div>
     </div>
     <div class="showservice-item" @click="selectService(1)">
       <div>
@@ -59,6 +59,7 @@
     display: flex;
     line-height: 5rem;
     color: orange;
+    font-size: 0.9rem;
   }
 
   .showservice-item img{

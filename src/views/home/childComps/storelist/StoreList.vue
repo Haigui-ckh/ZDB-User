@@ -60,7 +60,7 @@ export default {
 <style scoped>
   .store-list-name {
     text-align: center;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
   }
   .store-list-item {
     display: flex;

@@ -10,8 +10,8 @@
       <!-- 骑手招募页面 -->
       <div class="work-type content-box">
         <p>意向工作类型</p>
-        <div class="work-type-item" @click="type1click" :class="{active : riderInfo.worktype === 1}">快递骑手</div>
-        <div class="work-type-item" @click="type2click" :class="{active : riderInfo.worktype === 2}">外卖骑手</div>
+        <div class="work-type-item" @click="type2click" :class="{active : riderInfo.worktype.delivery }">快递骑手</div>
+        <div class="work-type-item" @click="type1click" :class="{active : riderInfo.worktype.takeout }">外卖骑手</div>
       </div>
       <div class="rider-tel content-box">
         <span>手机号:</span>
@@ -57,17 +57,29 @@
       return{
         riderInfo: {
           tel:String,
-          worktype: 0
+          worktype: {
+            takeout: undefined,
+            delivery: undefined
+          }
         }
         
       }
     },
     methods: {
       type1click() {
-        this.riderInfo.worktype = 1;
+        if (this.riderInfo.worktype.takeout === undefined) {
+          this.riderInfo.worktype.takeout = true
+        }else {
+          this.riderInfo.worktype.takeout =  undefined
+        }
+        
       },
       type2click() {
-        this.riderInfo.worktype = 2;
+        if (this.riderInfo.worktype.delivery === undefined) {
+          this.riderInfo.worktype.delivery = true
+        }else {
+          this.riderInfo.worktype.delivery =  undefined
+        }
       }
     }
 

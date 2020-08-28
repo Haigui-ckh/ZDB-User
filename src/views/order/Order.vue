@@ -46,7 +46,8 @@
         this.currentIndex = index;
       },
       cancelOrder(oid) {
-        console.log('order中取消订单,订单号为' + oid)
+        // console.log('order中取消订单,订单号为' + oid)
+        
         this.$refs.Confirm.show('确定取消此订单？',{
           titleText: '确认'
         });

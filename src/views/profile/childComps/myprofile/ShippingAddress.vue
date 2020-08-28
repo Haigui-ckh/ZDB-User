@@ -4,18 +4,15 @@
       <span slot="centerword">我的地址</span>
       <span slot="rightword">新增</span>
       <div class="address-list">
-        <!-- <mt-cell :title="address" :label="secondLine">
-          <img src="~@/assets/img/profile/modify.svg" @click="handleModify(item)">
-        </mt-cell> -->
-        <mt-cell v-for="(item,index) in addData" :key="index"  :title="item.address" :label="secondLine(item)">
+        <mt-cell v-for="(item,index) in addData" :key="index"  :title="firstLine(item)" :label="secondLine(item)">
           <img src="~@/assets/img/profile/modify.svg" @click="handleModify(item)">
         </mt-cell>
       </div>
 
       <mt-popup
-      v-model="popupVisible"
-      position="bottom"
-      class="modifyPop">
+        v-model="popupVisible"
+        position="bottom"
+        class="modifyPop">
 
           <mt-button @click="modifyData" class="confirmBtn">确认</mt-button>
           <mt-button @click="popupVisible = false" class="confirmBtn">取消</mt-button>
@@ -23,7 +20,17 @@
 
         <mt-field label="收件人姓名" placeholder="请输入收件人姓名" v-model="temp.person"></mt-field>
         <mt-field label="收件人手机号" placeholder="请输入收件人手机号" type="tel" v-model="temp.tel"></mt-field>
-        <mt-field label="详细地址" placeholder="在此输入详细地址" type="textarea" rows="3" v-model="temp.address"/>
+        <mt-field label="楼栋" placeholder="点击选择楼栋" type="tel" v-model="temp.building" @click.native="buildChoose"></mt-field>
+        <mt-field label="详细地址" placeholder="在此输入详细地址" type="textarea" rows="3" v-model="temp.addressDetails"/>
+      </mt-popup>
+
+      <!-- 楼栋选择弹窗 -->
+      <mt-popup
+        v-model="buildPopVisible"
+        position="bottom"
+        popup-transition="popup-fade"
+        class="buildPop">
+          <mt-cell v-for="(build,index) in buildings" :key="index" :title="build" @click.native="buildItemClick(build)"></mt-cell>
       </mt-popup>
     </OnePageScroll>
   </div>
@@ -42,30 +49,36 @@
       return {
         addData:[
           {
-            address: '竹园',
+            addressDetails: '101',
+            building: '竹园八舍',
             person: '曹凯晖',
             tel: 1452148454,
           },
           {
-            address: '李园',
+            addressDetails: '202',
+            building: '李园八舍',
             person: '张三',
             tel: 1452148454,
           },
           {
-            address: '桃园',
+            addressDetails: '303',
+            building: '桃园六舍',
             person: '李四',
             tel: 1452148454,
           },
         ],
         popupVisible: false,
+        buildPopVisible: false,
         phone: undefined,
         username: undefined,
         addressDetails: '',
         temp: {
-          address: '',
+          addressDetails: '',
           person: '',
           tel: '',
-        }
+          building: ''
+        },
+        buildings: ['李园八舍','桃园六舍','南园二舍'],
       }
     },
     methods: {
@@ -75,6 +88,9 @@
       handleModify(item) {
         this.temp = Object.assign({}, item)
         this.popupVisible = true
+      },
+      firstLine(item) {
+        return item.building + ' '+item.addressDetails
       },
       secondLine(item) {
         return item.person +' '+ item.tel
@@ -87,6 +103,13 @@
           message: '修改成功',
           duration: 2000
         });
+      },
+      buildChoose() {
+        this.buildPopVisible = true
+      },
+      buildItemClick(build) {
+        this.buildPopVisible = false
+        this.temp.building = build
       }
     }
   }
@@ -118,5 +141,8 @@
     background-color: #FF9933;
     font-size: 16px;
     color: white;
+  }
+  .buildPop {
+    width: 100%;
   }
 </style>

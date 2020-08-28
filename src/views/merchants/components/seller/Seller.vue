@@ -20,6 +20,7 @@
               class="pics-item"
               v-for="(imgurl,index) in seller.poi_env.thumbnails_url_list"
               :key="index"
+              @click="picClick(index)"
             >
               <img :src="imgurl">
             </li>
@@ -27,8 +28,21 @@
         </div>
 
         <div class="safety-wrapper">
-          查看食品安全档案
-          <span class="icon-keyboard_arrow_right"></span>
+          营业执照/经营许可
+          <!-- <span class="icon-keyboard_arrow_right"></span> -->
+        </div>
+        <div class="pics-wrapper" v-if="seller.poi_env" ref="picsView">
+          <ul class="pics-list" ref="picsList">
+            <li
+              ref="picsItem"
+              class="pics-item"
+              v-for="(imgurl,index) in seller.poi_env.thumbnails_url_list"
+              :key="index"
+              @click="picClick(index)"
+            >
+              <img :src="imgurl">
+            </li>
+          </ul>
         </div>
       </div>
 
@@ -41,9 +55,9 @@
         <div class="shipping-wrapper">
           营业时间: {{seller.shipping_time}}
         </div>
-        <div class="report-wrapper">
+        <div class="report-wrapper"  @click="reportClick()">
           举报商家
-          <span class="icon-keyboard_arrow_right"></span>
+          <span class="icon-keyboard_arrow_right" ></span>
         </div>
       </div>
 
@@ -82,36 +96,16 @@
   import Split from '../split/Split'
   import BScroll from 'better-scroll'
   import axios from 'axios' 
+import { ImagePreview } from 'vant'
 
   export default {
+    name: "Seller",
     data() {
       return {
-        seller: {}
+        seller: {},
       }
     },
     created() {
-      // fetch("/api/seller")
-      //   .then(res => {
-      //     return res.json()
-      //   })
-      //   .then(response => {
-      //     if (response.code == 0) {
-      //       this.seller = response.data
-      //       this.$nextTick(() => {
-              // if (this.seller.poi_env.thumbnails_url_list) {
-              //   let imgW = this.$refs.picsItem[0].clientWidth
-              //   let marginR = 11
-              //   let width = (imgW + marginR) * this.seller.poi_env.thumbnails_url_list.length
-              //   this.$refs.picsList.style.width = width + "px"
-              //   this.scroll = new BScroll(this.$refs.picsView, {
-              //     scrollX: true
-              //   })
-              // }
-              // this.sellerView = new BScroll(this.$refs.sellerView)
-      //       })
-
-      //     }
-      //   })
       axios({
         url: '/seller.json'
         }).then(res => {
@@ -123,16 +117,32 @@
                 let width = (imgW + marginR) * this.seller.poi_env.thumbnails_url_list.length
                 this.$refs.picsList.style.width = width + "px"
                 this.scroll = new BScroll(this.$refs.picsView, {
-                  scrollX: true
+                  scrollX: true,
+                  click: true,
                 })
               }
-              this.sellerView = new BScroll(this.$refs.sellerView)
+              this.sellerView = new BScroll(this.$refs.sellerView,{ click: true })
           })
         })
     },
+    mounted() {
+    },
     components: {
-      Split
-    }
+      Split,
+      [ImagePreview.name]: ImagePreview
+    },
+    methods: {
+      reportClick() {
+        this.$router.push('/reportseller')
+      },
+      picClick(index) {
+        ImagePreview({
+          images: this.seller.poi_env.thumbnails_url_list,
+          startPosition: index
+        });
+        
+      }
+    },
   }
 </script>
 
@@ -243,6 +253,7 @@
     font-size: 14px;
     line-height: 18px;
   }
+
   .report-wrapper {
     padding: 15px 17px 15px 25px;
     background-size: 15px 15px;

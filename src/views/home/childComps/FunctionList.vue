@@ -1,8 +1,10 @@
 <template>
   <div id="function-list">
     <div v-for="(item,index) in functionList" :key="index" class="function-list-item">
-      <img :src="item.imgUrl">
-      <div>{{item.name}}</div>
+      <a :href="item.link"> 
+        <img :src="item.imgUrl">
+        <div>{{item.name}}</div>
+      </a>
     </div>
   </div>
 </template>

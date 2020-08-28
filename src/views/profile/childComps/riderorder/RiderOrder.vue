@@ -10,7 +10,7 @@
     <scroll class="order-scroll">
       <div class="order-record" v-if="currentIndex === 3">
         <div class="order-volume">单量：</div>
-        <div class="order-amount">总额：</div>
+        <div class="order-amount">薪资余额：</div>
       </div>
       <rider-order-list :orderType="currentIndex"></rider-order-list>
     </scroll>

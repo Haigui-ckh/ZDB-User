@@ -103,7 +103,7 @@
 .expInfo,
 .screenshotInfo,
 .remarks,
-.specs,
+/* .specs, */
 .special,
 .sub,
 .seAddr {
@@ -201,9 +201,15 @@
 }
 
 .specs {
-	height: 5.777777rem;
+	/* height: 5.777777rem; */
+	/* overflow-y: auto; */
 }
-
+.specs .expTit{
+	width: 100%
+}
+.special {
+	margin-bottom: 15px;
+}
 .sub {
 	height: 4.555555rem;
 }

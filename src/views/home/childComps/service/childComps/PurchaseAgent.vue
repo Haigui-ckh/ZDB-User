@@ -2,7 +2,7 @@
   <div id="purchase-agent">
 		<div class="expInfo">
 			<p class="expTit">代购商品描述:</p>
-			<textarea name="expinfo" class="infotext" placeholder="描述需要代购的商品"></textarea>
+			<textarea v-model="deliveryData.goodsDesc" name="expinfo" class="infotext" placeholder="描述需要代购的商品" ></textarea>
 		</div>
 
 		<div class="give" @click="chooseAddr">
@@ -21,14 +21,17 @@
 
 		<div class="remarks">
 			<p class="expTit">商品价格预计(此费用与配送员结算)</p>
-			<input class="remarkInput" type="number" placeholder="" />
+			<input v-model="deliveryData.predictPrice" class="remarkInput" type="number" placeholder="" />
 		</div>
+
 		<div class="sub">
 			<span class="dan">小费：</span>
-			<input type="text" class="num" value="1"/><span class="dan"> 元</span>
+			<input v-model="deliveryData.tips" type="text" class="num" value="1" @change="changeTips"/>
+			<span class="dan"> 元</span>
+
 			<div class="count">
 				<span class="zj">总计：</span>
-				<span class="money">￥0</span>
+				<span class="money">￥{{deliveryData.total}}</span>
 			</div>
 			<button class="btn" @click="handleSubmit">提交订单</button>
 		</div>
@@ -39,6 +42,9 @@
 
 <script>
 	import AddrPop from "components/content/addrpop/AddrPop"
+
+	import { MessageBox,Toast } from 'mint-ui';
+
   export default {
 		name: "PurchaseAgent",
 		props: {
@@ -49,12 +55,33 @@
 		},
 		data() {
 			return {
-        temp: undefined,
+				temp: undefined,
+				deliveryData: {
+					goodsDesc: '',
+					sendInfo: {
+						name: '',
+						tel: '',
+						address: ''
+					},
+					predictPrice: 0,
+					tips: 0,
+					total: 0
+				},
 			}
 		},
 		methods: {
 			handleSubmit() {
-				this.$router.push('/orderdetails')
+				MessageBox.confirm('确定提交订单?').then(action => {
+					// 上传订单数据
+					setTimeout(() => {
+						this.$router.push('/orderdetails')
+					}, 1000);
+				}).catch(() => {
+					Toast({
+						message:'订单未提交',
+						duration: 1000
+					});
+				})
 			},
 			chooseAddr() {
         this.$refs.addrPop.addrChoose();
@@ -63,7 +90,11 @@
         // console.log(item)
         // 获取地址
         this.temp = Object.assign({}, item)
-      }
+        this.deliveryData.sendInfo = Object.assign({}, item)
+			},
+			changeTips() {
+				this.deliveryData.total = this.deliveryData.tips
+			}
 		}
   }
 </script>

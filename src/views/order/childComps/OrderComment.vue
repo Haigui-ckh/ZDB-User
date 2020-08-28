@@ -27,6 +27,7 @@
 
 import BackNav from "components/content/backnav/BackNav"
 import Stars from "components/content/order/Stars"
+import { Toast } from 'vant'
 
 export default {
   name: "OrderComment",
@@ -60,7 +61,13 @@ export default {
     commitClick() {
       // 提交星级和评论内容和匿名评论flag
       console.log('提交')
+      this.$router.go(-1)
       //成功与否弹窗
+      Toast({
+        message:'评价成功',
+        position: 'middle',
+        duration: 2000
+      })
     }
   }
 }

@@ -12,10 +12,10 @@
     <!-- 可滚动的内容区域 -->
     <scroll class="home-scroll" :pull-up-load="true" @pullingUp="loadmore">
       <search class="home-search" />
-      <home-swiper />
+      <home-swiper :swiperImgList="swiperList"/>
       <show-service />          <!-- 营销配置，快递服务等 -->             
       <function-list :functionList="funcList" />       <!-- 功能区 --><!-- 项目需求中要求可自由增添或删减 -->    
-      <advs />                          <!-- 广告条部分 -->   
+      <advs :advsList="advsList"/>                          <!-- 广告条部分 -->   
       <daily-special  :specialGoods="dailyGoodsList"/>   <!-- 天天特价 -->
       <recommend-store :merchants="recommendStoreList" />    <!-- 推荐店铺 -->
       <store-list :stores="storeList"/>
@@ -90,27 +90,33 @@
         funcList:[
           { 
             imgUrl: 'img/f1.svg',
-            name: '功能1' 
+            name: '功能1',
+            link: ''
           },
           { 
             imgUrl: 'img/f1.svg',
-            name: '功能1' 
+            name: '功能2',
+            link: ''
           },
           { 
             imgUrl: 'img/f1.svg',
-            name: '功能1' 
+            name: '功能3',
+            link: '' 
           },
           { 
             imgUrl: 'img/f1.svg',
-            name: '功能1' 
+            name: '功能4',
+            link: '' 
           },
           { 
             imgUrl: 'img/f1.svg',
-            name: '功能1' 
+            name: '功能5',
+            link: '' 
           },
           { 
             imgUrl: 'img/f1.svg',
-            name: '功能1' 
+            name: '功能6',
+            link: '' 
           },
         ],
         // 除名字图片外需要的字段：storeName,monthlySalesVolume,deliveryTime,deliverDistance,startFee,deliveryFee 
@@ -130,6 +136,15 @@
           { name: '可乐' },
           { name: '酸辣粉' },
           { name: '奶茶' }
+        ],
+        swiperList: [
+          { imgUrl:'img/b1.png', link: ''},
+          { imgUrl:'img/b2.jpg', link: ''},
+          { imgUrl:'img/b3.jpg', link: ''},
+        ],
+        advsList: [
+          { imgUrl:'img/campus1.png', link: ''},
+          { imgUrl:'img/campus1.png', link: ''},
         ]
       }
     },
